@@ -1,8 +1,8 @@
 # MCP Server 시작 지점
 import sys
 import os
-from langchain.retrievers.ensemble import EnsembleRetriever
-from langchain_community.retrievers import BM25Retriever
+from langchain_core.documents import Document
+from typing import List
 
 from agent.agent1 import repo_to_rag
 from modules.rag import DocumentEmbedder
@@ -33,12 +33,44 @@ GitHub 저장소를 검색하고 싶으시다면 (agent1):
 
 embedder = DocumentEmbedder()
 rag = embedder.get_vectorstore()
+top_k = 5
 
 mcp = FastMCP(
     name="tema1-leanathon-lst",
     version="0.0.1",
     description="-"
 )
+
+
+def format_search_results(docs: List[Document]) -> str:
+    """
+    Format search results as markdown.
+
+    Args:
+        docs: List of documents to format
+
+    Returns:
+        Markdown formatted search results
+
+    """
+
+    if not docs:
+        return "No relevant information found."
+
+    markdown_results = "## Search Results\n\n"
+
+    for i, doc in enumerate(docs, 1):
+        source = doc.metadata.get("source", "Unknown source")
+        page = doc.metadata.get("page", None)
+        page_info = f" (Page: {page + 1})" if page is not None else ""
+
+        markdown_results += f"### Result {i}{page_info}\n\n"
+        markdown_results += f"{doc.page_content}\n\n"
+        markdown_results += f"Source: {source}\n\n"
+        markdown_results += "---\n\n"
+
+    return markdown_results
+
 
 @mcp.tool()
 async def agent1(repo_url: str) -> str:
@@ -68,14 +100,9 @@ async def agent2(query: str) -> str:
     """
 
     try:
-        bm25_retriever = BM25Retriever.from_documents(split_docs, k=top_k)
-        dense_retriever = db.as_retriever(search_kwargs={"k": top_k})
-        retriever = EnsembleRetriever(
-            retrievers=[bm25_retriever, dense_retriever],
-            weights=[0.5, 0.5]
-        )
-        retriever.get_relevant_documents(query)
-        return "agnet2 check"
+        retriever = rag.as_retriever(search_kwargs={"k": top_k})
+        results = retriever.get_relevant_documents(query)
+        return format_search_results(results)
     except Exception as e:
         return f"An error occurred while generating the response: {str(e)}"
 
