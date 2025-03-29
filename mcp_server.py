@@ -107,4 +107,4 @@ async def agent2(query: str) -> str:
         return f"An error occurred while generating the response: {str(e)}"
 
 if __name__ == "__main__":
-    mcp.run()
+    mcp.run(transport="sse")
