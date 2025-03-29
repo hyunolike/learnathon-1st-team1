@@ -22,7 +22,7 @@ async def search(query: str, top_k: int = 5) -> str:
     """
 
     try:
-        bm25_retriever = BM25Retriever.from_documents(split_docs, top_k)
+        bm25_retriever = BM25Retriever.from_documents(split_docs, k=top_k)
         dense_retriever = db.as_retriever(search_kwargs={"k": top_k})
         retriever = EnsembleRetriever(
             retrievers=[bm25_retriever, dense_retriever],
