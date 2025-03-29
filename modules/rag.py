@@ -34,7 +34,9 @@ class DocumentEmbedder:
         )
         
         self.vectorstore = Chroma(
-            persist_directory=persist_directory,
+            # persist_directory=persist_directory,
+            # persist_directory="./db/chroma",  # 쓰기 가능한 경로로 변경
+            persist_directory=None,
             embedding_function=self.embeddings,
             collection_name=collection_name
         )

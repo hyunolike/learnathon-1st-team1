@@ -3,6 +3,8 @@ import shutil
 import os
 import subprocess
 import platform
+import logging
+
 
 def clone_repo_url(repo_url, local_path):
     """
@@ -16,10 +18,12 @@ def clone_repo_url(repo_url, local_path):
     
     try:
         repo = Repo.clone_from(repo_url, local_path)
-        print(f"리포지토리 클론 완료: {repo_url}")
+        logging.info(f"리포지토리 클론 완료: {repo.working_dir}")
+        # print(f"리포지토리 클론 완료: {repo_url}")
         return repo
     except Exception as e:
-        print(f"에러 발생: {str(e)}")
+        # print(f"에러 발생: {str(e)}")
+        logging.error(e)
 
 def remove_repository(local_path):
     """
@@ -40,15 +44,17 @@ def remove_repository(local_path):
                 subprocess.run(f'rd /s /q "{git_path}"', shell=True, check=True)
             else:  # macOS, Linux
                 subprocess.run(f'rm -rf "{git_path}"', shell=True, check=True)
-            print(f"'.git' 디렉토리 삭제 완료")
+            # print(f"'.git' 디렉토리 삭제 완료")
         else:
-            print(f"'.git' 디렉토리를 찾을 수 없습니다")
+            # print()
+            logging.error(f"'.git' 디렉토리를 찾을 수 없습니다")
 
         # 디렉토리 삭제
         shutil.rmtree(local_path)
-        print(f"'{local_path}' 삭제 완료")
+        # print(f"'{local_path}' 삭제 완료")
     except Exception as e:
-        print(f"에러 발생: {str(e)}")
+        # print(f"에러 발생: {str(e)}")
+        logging.error(f"에러 발생: {str(e)}")
 
 def main():
     repo_url = "https://github.com/LangChain-OpenTutorial/LangChain-OpenTutorial"

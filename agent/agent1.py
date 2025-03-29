@@ -10,8 +10,8 @@ from modules.repo_manage import clone_repo_url, remove_repository
 
 import uuid
 
-embedder = DocumentEmbedder()
-rag = embedder.get_vectorstore()
+# embedder = DocumentEmbedder()
+# rag = embedder.get_vectorstore()
 
 def repo_to_rag(repo_url: str):
     # 1. 리포지토리 클론
@@ -33,6 +33,7 @@ def repo_to_rag(repo_url: str):
 
 if __name__ == "__main__":
     repo_to_rag("https://github.com/openai/openai-python")
+    repo_to_rag()
 
 
 

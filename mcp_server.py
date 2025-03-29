@@ -3,6 +3,10 @@ import sys
 import os
 from langchain.retrievers.ensemble import EnsembleRetriever
 from langchain_community.retrievers import BM25Retriever
+
+from agent.agent1 import repo_to_rag
+from modules.rag import DocumentEmbedder
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from mcp.server.fastmcp import FastMCP
@@ -23,6 +27,8 @@ GitHub 저장소를 검색하고 싶으시다면 (agent1):
 "이 코드에서 ~부분은 어떻게 작동하나요?"
 """
 
+embedder = DocumentEmbedder()
+rag = embedder.get_vectorstore()
 
 mcp = FastMCP(
     name="tema1-leanathon-lst",
@@ -42,7 +48,7 @@ async def agent1(repo_url: str) -> str:
     """
 
     try:
-        return "agent1 check"
+        return repo_to_rag(repo_url)
     except Exception as e:
         return f"An error occurred while processing the repository: {str(e)}"
 
