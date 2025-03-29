@@ -12,10 +12,11 @@ import sys
 # 로깅 설정
 logging.basicConfig(
     level=logging.INFO,
+    stream=sys.stderr,  # ✅ MCP 안전하게 처리
     format='%(asctime)s [%(levelname)s] %(message)s',
-    handlers=[
-        logging.StreamHandler(sys.stdout)
-    ]
+    # handlers=[
+    #     logging.StreamHandler(sys.stdout)
+    # ]
 )
 logger = logging.getLogger(__name__)
 
@@ -28,6 +29,7 @@ class MultiLanguageDocumentLoader:
             root_path: 문서를 검색할 루트 디렉토리 경로
         """
         self.root_path = root_path
+        self.logger = logger
         self.logger = logger
         # 기본 인코딩 후보 목록
         self.encoding_candidates = ['utf-8', 'cp949', 'euc-kr', 'ascii']
@@ -318,5 +320,5 @@ def main():
     success_rate = (len(loader.get_supported_languages()) - len(failed_languages)) / len(loader.get_supported_languages()) * 100
     logger.info(f"\n테스트 성공률: {success_rate:.1f}%")
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

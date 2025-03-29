@@ -9,4 +9,4 @@ langchain-text-splitters
 pdfplumber
 rank_bm25
 chardet
-git-python
+gitpython

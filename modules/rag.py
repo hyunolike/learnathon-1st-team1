@@ -5,10 +5,12 @@ from langchain_chroma import Chroma
 from langchain_core.documents import Document
 import logging
 from dotenv import load_dotenv
+import sys
 
 # 로깅 설정
 logging.basicConfig(
     level=logging.INFO,
+    stream=sys.stderr,  # ✅ MCP 안전하게 처리
     format='%(asctime)s [%(levelname)s] %(message)s'
 )
 logger = logging.getLogger(__name__)
@@ -37,6 +39,7 @@ class DocumentEmbedder:
             # persist_directory=persist_directory,
             # persist_directory="./db/chroma",  # 쓰기 가능한 경로로 변경
             persist_directory=None,
+            # persist_directory="/tmp/chroma_db",  # ✅ 맥/리눅스 공용 임시 쓰기 디렉토리
             embedding_function=self.embeddings,
             collection_name=collection_name
         )
@@ -103,5 +106,5 @@ def main():
     for key, value in stats.items():
         logger.info(f"{key}: {value}")
 
-if __name__ == "__main__":
-    main() 
+# if __name__ == "__main__":
+#     main()

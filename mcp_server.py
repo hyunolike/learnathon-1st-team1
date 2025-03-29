@@ -7,6 +7,10 @@ from langchain_community.retrievers import BM25Retriever
 from agent.agent1 import repo_to_rag
 from modules.rag import DocumentEmbedder
 
+
+from agent.agent1 import repo_to_rag
+from modules.rag import DocumentEmbedder
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from mcp.server.fastmcp import FastMCP
