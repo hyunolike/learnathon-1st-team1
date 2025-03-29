@@ -15,7 +15,7 @@ def clone_repo_url(repo_url, local_path):
     - repo_url: clone 받을 repository url 입력
     - local_path: clone 받을 디렉토리
     """
-    
+
     try:
         repo = Repo.clone_from(repo_url, local_path)
         logging.info(f"리포지토리 클론 완료: {repo.working_dir}")
@@ -23,7 +23,8 @@ def clone_repo_url(repo_url, local_path):
         return repo
     except Exception as e:
         # print(f"에러 발생: {str(e)}")
-        logging.error(e)
+        # logging.error(e)
+        raise RuntimeError(f"clone_repo_url :: 에러 발생: {str(e)}")
 
 def remove_repository(local_path):
     """
@@ -56,11 +57,11 @@ def remove_repository(local_path):
         # print(f"에러 발생: {str(e)}")
         logging.error(f"에러 발생: {str(e)}")
 
-def main():
-    repo_url = "https://github.com/LangChain-OpenTutorial/LangChain-OpenTutorial"
-    local_path = "./repo_data"
-
-    clone_repo_url(repo_url, local_path)
-
-if __name__ == "__main__":
-    main()
+# def main():
+#     repo_url = "https://github.com/LangChain-OpenTutorial/LangChain-OpenTutorial"
+#     local_path = "./repo_data"
+#
+#     clone_repo_url(repo_url, local_path)
+#
+# if __name__ == "__main__":
+#     main()

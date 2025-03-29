@@ -9,10 +9,11 @@ import sys
 # 로깅 설정
 logging.basicConfig(
     level=logging.INFO,
+    stream=sys.stderr,  # ✅ MCP 안전하게 처리,
     format='%(asctime)s [%(levelname)s] %(message)s',
-    handlers=[
-        logging.StreamHandler(sys.stdout)
-    ]
+    # handlers=[
+    #     logging.StreamHandler(sys.stdout)
+    # ]
 )
 logger = logging.getLogger(__name__)
 
@@ -184,5 +185,5 @@ def main():
         logger.info(split_documents[0].page_content[:200] + "..." if len(split_documents[0].page_content) > 200 else split_documents[0].page_content)
         logger.info("-" * 40)
 
-if __name__ == "__main__":
-    main() 
+# if __name__ == "__main__":
+#     main()
