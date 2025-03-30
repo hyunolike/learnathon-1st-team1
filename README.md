@@ -73,3 +73,38 @@ MCP 기반 코드저장소 분석과 질의응답을 자동화하는 멀티 에�
 - 임베딩 에이전트로 코드의 구조와 의미를 벡터화
 - QA 에이전트로 자연어 질의에 대한 정확한 답변 제공
 
+## 프로젝트 구조
+![image](https://github.com/user-attachments/assets/3c25cbf3-44ed-4647-aa0c-d5a0317a0adc)
+
+### 사용자 시나리오
+1. 첫 단계: 사용자가 GitHub 저장소 URL 입력
+  - 입력: "https://github.com/openai/openai-python 코드를 분석해주세요"
+  - 시스템: repo_to_rag 도구가 저장소를 클론하고 분석한 후 기본 정보 제공
+  - 응답: "## 저장소 분석 결과 ### 기본 정보 - 저장소 URL: https://github.com/openai/openai-python ..."
+
+2. 두 번째 단계: 사용자가 분석된 코드에 대해 질문
+  - 입력: "이 라이브러리에서 API 호출은 어떻게 처리하나요?"
+  - 시스템: rag_to_context 도구가 관련 코드 조각을 검색하여 반환
+  - 응답: "## Search Results ### Result 1 [코드 조각] Source: openai/api_resources/..."
+
+## Agnet 설명
+### [1] 임베딩 에이전트
+![image](https://github.com/user-attachments/assets/33a47e60-457f-44f0-9fe7-4d1c9bc7a640)
+
+### [2] QA 에이전트
+![image](https://github.com/user-attachments/assets/71b7dc14-e3b6-4c5c-b675-d456864bf4bd)
+
+## 데모
+> [!NOTE]
+> Cursor AI 사용.
+
+
+|step 1. 사용자가 Github 저장소 URL 입력|step 2. 사용자가 분석된 코드에 대해 질문|
+|:-:|:-:|
+|<img width="567" alt="커서AI 데모1" src="https://github.com/user-attachments/assets/ee91a87b-6ec0-42d8-92ea-5b88f940cac6" />|<img width="721" alt="커서AI 데모2" src="https://github.com/user-attachments/assets/12688ab8-86f0-4c37-a1e9-1a2644e367c2" />|
+
+
+
+
+
+
