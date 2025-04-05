@@ -1,0 +1,3 @@
+[submodule "mcp-test"]
+	path = mcp-test
+	url = git@github.com:codepresso-learnathon-1st/mcp-test.git
