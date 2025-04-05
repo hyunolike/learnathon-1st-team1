@@ -103,6 +103,11 @@ MCP 기반 코드저장소 분석과 질의응답을 자동화하는 멀티 에�
 |:-:|:-:|
 |<img width="567" alt="커서AI 데모1" src="https://github.com/user-attachments/assets/ee91a87b-6ec0-42d8-92ea-5b88f940cac6" />|<img width="721" alt="커서AI 데모2" src="https://github.com/user-attachments/assets/12688ab8-86f0-4c37-a1e9-1a2644e367c2" />|
 
+---
+### 테스트 자료
+|테스트 명|바로 가기|
+|-|-|
+|MCP Server 이용해 MCP Host 동작 테스트 (RAG 시스템)|[mcp-test](https://github.com/codepresso-learnathon-1st/mcp-test/tree/27740d6a9c1985678e9f4bd265c52bc131daa0bc)|
 
 
 
